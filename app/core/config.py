@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
         return MultiHostUrl.build(
-            scheme="postgresql+psycopg",
+            scheme="postgresql+psycopg2",
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             host=self.POSTGRES_SERVER,
@@ -62,6 +62,11 @@ class Settings(BaseSettings):
     HS_APP_ID: int
     HS_CLIENT_ID: str
     HS_CLIENT_SECRET: str
-    HS_REDIRECT_URI: str = f'{server_host()}{API_V1_STR}/install'
+
+    @computed_field
+    @property
+    def HS_REDIRECT_URI(self) -> str:
+        return f'{self.server_host}{self.API_V1_STR}/install'
+
 
 settings = Settings()

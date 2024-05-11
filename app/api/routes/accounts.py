@@ -13,6 +13,7 @@ def get_account(session: SessionDep, id: str) -> Any:
     account = session.get(Account, id)
     if not account:
         raise HTTPException(status_code=404, detail="Account not found")
+    return account
 
 
 @router.post("/", response_model=Account)

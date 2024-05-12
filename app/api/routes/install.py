@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 from app.models import Account, Token
 from app.api.deps import SessionDep
 from app.hubspot.helpers import get_tokens, get_portal_info
-from app.database.helpers import create_account, create_token
+from app.database.helpers import create_account, create_token, get_payment_by_checkout
 
 router = APIRouter()
 
@@ -24,12 +24,14 @@ def get_install(session: SessionDep, code: str, state: str) -> Any:
     if not portal_info:
         raise HTTPException(status_code=404, detail="Error getting portal info")
     
+    #TODO: Get details from state which is stripe checkout session ID
+    payment = get_payment_by_checkout(session=session, checkout_id=state)
     account = Account(
         portal_id=portal_info['hub_id'],
         hub_domain=portal_info['hub_domain'],
         install_user_id=portal_info['user_id'],
         install_date=datetime.datetime.now(),
-        install_user_email=state
+        install_user_email=payment.purchaser_email
     )
     created_account = create_account(session=session, account=account)
     account_id = created_account.id

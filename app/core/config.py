@@ -1,4 +1,4 @@
-from typing import Annotated, Any, Literal
+from typing import Annotated, Any, Literal, Optional
 
 from pydantic import (
     AnyUrl,
@@ -67,6 +67,29 @@ class Settings(BaseSettings):
     @property
     def HS_REDIRECT_URI(self) -> str:
         return f'{self.server_host}{self.API_V1_STR}/install'
+    
+    @computed_field
+    @property
+    def WEBHOOK_URL(self) -> str:
+        return f'{self.server_host}{self.API_V1_STR}/webhooks'
 
+    STRIPE_PROD_PUBLISHABLE_KEY: Optional[str]
+    STRIPE_PROD_SECRET_KEY: Optional[str]
+    STRIPE_TEST_PUBLISHABLE_KEY: Optional[str]
+    STRIPE_TEST_SECRET_KEY: Optional[str]
+
+    @computed_field
+    @property
+    def STRIPE_PUBLISHABLE_KEY(self) -> str:
+        if self.ENVIRONMENT in ["local", "staging"]:
+            return self.STRIPE_TEST_PUBLISHABLE_KEY
+        return self.STRIPE_PROD_PUBLISHABLE_KEY
+    
+    @computed_field
+    @property
+    def STRIPE_SECRET_KEY(self) -> str:
+        if self.ENVIRONMENT in ["local", "staging"]:
+            return self.STRIPE_TEST_SECRET_KEY
+        return self.STRIPE_PROD_SECRET_KEY
 
 settings = Settings()

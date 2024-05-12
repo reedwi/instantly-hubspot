@@ -23,6 +23,7 @@ class Subscription(SQLModel, table=True):
     start_date: datetime.datetime
     end_date: datetime.datetime
     tier: str
+    email: str
     created_at: Optional[datetime.datetime]
 
 
@@ -32,6 +33,7 @@ class Payment(SQLModel, table=True):
     amount: float
     purchaser_email: str
     portal_id: int
+    stripe_checkout_id: str
     created_at: Optional[datetime.datetime]
 
 
@@ -74,6 +76,14 @@ class Token(SQLModel, table=True):
     hs_refresh_token: Optional[str]
     hs_expires_at: Optional[datetime.datetime]
     instantly_key: Optional[str]
+    created_at: Optional[datetime.datetime]
+
+
+class InstantlyHook(SQLModel, table=True):
+    metadata = MetaData(schema="instantly_hubspot")
+    id: Optional[str] = Field(default=None, primary_key=True)
+    account_id: str =  Field(foreign_key="account.id")
+    details: Optional[str]
     created_at: Optional[datetime.datetime]
 
 

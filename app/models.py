@@ -89,3 +89,170 @@ class InstantlyHook(SQLModel, table=True):
 
 class HubspotHook(BaseModel):
     pass
+
+
+class EmailSent(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    email_account: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    step: Optional[int] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    variant: Optional[int] = None
+    workspace: Optional[str] = None
+
+class LeadMeetingBooked(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+
+class LeadMeetingCompleted(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+class LeadOutOfOffice(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+
+class LeadWrongPerson(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+
+class LeadNotInterested(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+
+class CampaignCompleted(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    event_type: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+class LeadClosed(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    workspace: Optional[str] = None
+
+
+class EmailOpened(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    email_account: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    step: Optional[int] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    variant: Optional[int] = None
+    workspace: Optional[str] = None
+
+
+class LinkClicked(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    email_account: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    step: Optional[int] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    variant: Optional[int] = None
+    workspace: Optional[str] = None
+
+
+class LeadUnsubscribed(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    step: Optional[int] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    variant: Optional[int] = None
+    workspace: Optional[str] = None
+
+class ReplyReceived(BaseModel):
+    campaign_id: Optional[str] = None
+    campaign_name: Optional[str] = None
+    email: Optional[str] = None
+    email_account: Optional[str] = None
+    event_type: Optional[str] = None
+    firstName: Optional[str] = None
+    is_first: Optional[bool] = None
+    lastName: Optional[str] = None
+    lead_email: Optional[str] = None
+    reply_html: Optional[str] = None
+    reply_subject: Optional[str] = None
+    reply_text: Optional[str] = None
+    reply_text_snippet: Optional[str] = None
+    step: Optional[int] = None
+    timestamp: Optional[str] = None
+    unibox_url: Optional[str] = None
+    variant: Optional[int] = None
+    workspace: Optional[str] = None

@@ -46,3 +46,35 @@ def get_portal_info(access_token: str) -> dict:
         }
     else:
         return None
+    
+
+def create_contact(access_token: str, email: str):
+    url = 'https://api.hubapi.com/crm/v3/objects/contacts/'
+    headers = {
+        'content-type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+    }
+    data = {
+        "email": email
+    }
+    res = requests.post(url, json=data, headers=headers)
+    if res.ok:
+        return res.json()
+
+
+def find_contact(access_token: str, email: str):
+    url = f'https://api.hubapi.com/crm/v3/objects/contacts/{email}'
+    params = {"idProperty": "email"}
+    headers = {
+        'content-type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+    }
+    res = requests.get(url, params=params, headers=headers)
+    if res.ok:
+        return res.json()['id']
+    else:
+        contact = create_contact(access_token=access_token, email=email)
+        return contact['id']
+
+def create_timeline_event():
+    pass

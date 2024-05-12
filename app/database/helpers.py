@@ -42,3 +42,15 @@ def get_payment_by_checkout(session: Session, checkout_id: str) -> Payment:
         select(Payment).where(Payment.stripe_checkout_id == checkout_id)
     ).first()
     return db_obj
+
+
+def get_account_by_webhook(session: Session, webhook_id: str) -> str:
+    db_obj = session.get(InstantlyHook, webhook_id)
+    return db_obj.account_id
+
+
+def get_tokens(session: Session, account_id: str) -> Token:
+    db_obj = session.exec(
+        select(Token).where(Token.account_id == account_id)
+    ).first()
+    return db_obj

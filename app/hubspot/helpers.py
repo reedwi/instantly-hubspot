@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 from app.core.config import settings
@@ -55,7 +57,9 @@ def create_contact(access_token: str, email: str):
         'Authorization': f'Bearer {access_token}'
     }
     data = {
-        "email": email
+        "properties": {
+            "email": email
+        } 
     }
     res = requests.post(url, json=data, headers=headers)
     if res.ok:
@@ -78,3 +82,50 @@ def find_contact(access_token: str, email: str):
 
 def create_timeline_event():
     pass
+
+
+def create_email(access_token: str, hs_contact_id: int, email_direction: str):
+    url = 'https://api.hubapi.com/crm/v3/objects/emails'
+    headers = {
+        'content-type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+    }
+
+    email_headers = {
+        "from": {
+            "email": "from@domain.com",
+            "firstName": "FromFirst",
+            "lastName": "FromLast"
+        },
+        "to": [
+            {
+            "email": "ToFirst ToLast<to@test.com>",
+            "firstName": "ToFirst",
+            "lastName": "ToLast"
+            }
+        ],
+        "cc": [],
+        "bcc": []
+    }
+    data = {
+        "properties": {
+            "hs_timestamp": "",
+            "hs_email_direction": "",
+            "hs_email_subject": "",
+            "hs_email_html": "",
+            "hs_email_status": "SENT",
+            "hs_email_headers": json.dumps(email_headers) # json escaped string https://developers.hubspot.com/docs/api/crm/email#set-email-headers,
+        },
+        "associations": [
+            {
+            "to": {
+                "id": hs_contact_id
+            },
+            "types": [
+                {
+                "associationCategory": "HUBSPOT_DEFINED",
+                "associationTypeId": 210
+                } ]
+            }
+        ]
+    }

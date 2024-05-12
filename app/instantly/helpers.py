@@ -8,6 +8,7 @@ def process_instantly_webhook(webhook_body, session: Session, wh_id: str):
     account_id = get_account_by_webhook(session=session, webhook_id=wh_id)
     tokens = get_tokens(session=session, account_id=account_id)
     hs_contact_id = find_contact(access_token=tokens.hs_access_token, email=webhook_body['email'])
+    
 
     match event_type:
         case 'lead_interested':
